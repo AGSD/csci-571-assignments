@@ -1,0 +1,17 @@
+{
+  "name": "sherlocked",
+  "version": "1.0.0",
+  "description": "Homework8 for USC CSCI 571",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Aditya Gaur",
+  "license": "ISC",
+  "dependencies": {
+    "@google/maps": "^0.4.6",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "request": "^2.85.0"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "Mainline": {
+    "Table": {
+      "Header": {
+        "Data": [
+          "Ppany",
+          "Suices",
+          "HQ",
+          "Annlion)",
+          "Hoee",
+          "Lo"
+        ]
+      },
+    "Row":[
+        {
+          "Company": "UPS",
+          "Services": "UPS Ground, UPS Freight",
+          "Hubs": {
+            "Hub": [ "","lala"
+              
+            ]
+          },
+          "Revenue": "$24,752",
+          "HomePage": "https://www.ups.com/",
+          "Logo": "http://cs-server.usc.edu:45678/hw/hw4/ups.jpg"
+        }
+    ]
+    }
+  }
+}

@@ -1,0 +1,1 @@
+{"connect":"SFTP","host":"cs-server.usc.edu","port":"22","user":"adityaga","pwd":"presto_gigio94","savepwd":"checked","remoteRoot":"/home/scf-23/adityaga/apache2.2.22/htdocs","privateKeyFile":""}

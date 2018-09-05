@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+Mysite
+</title>
+<meta charset="UTF-8">
+<script type="text/javascript">
+function retrieveJSON()
+{
+    filepos=document.getElementById("fileLocation").value; 
+    console.debug("Url received: "+filepos)
+    if(!filepos)
+        {
+            alert("Box is empty, Please enter a URL!");
+            return;
+        }
+    var ret;
+    console.debug("Calling Ajax");
+    callAjax(filepos,parseData);
+    return false;
+}
+
+function parseData(xhttp)
+{
+    console.debug("Got data, lets parse it");
+    var data = xhttp.responseText;
+    var parsed = JSON.parse(data);
+    var headings = parsed.Mainline.Table.Header.Data;
+    var rows;
+    
+    if("Row" in parsed.Mainline.Table)
+    {
+        rows = parsed.Mainline.Table.Row;
+        console.debug("found row");
+    }
+    else
+    {
+        console.debug("Didn't find row");
+        alert("No company entries found!");
+        return;
+    }
+    
+    console.debug(parsed);
+    
+    popup = window.open("", "_blank", "height=600,width=700,status=yes,toolbar=no,menubar=no,location=no,scrollbars=1,resizable=1");
+    function pwrite (s){popup.document.write(s);} //creating a synonym
+    
+    console.debug("created new window");
+    
+    pwrite("<!DOCTYPE html><html><head><title>Top Trucking Companies</title><style>table, th, td {border:1px solid black;}</style><body><table>"); //start the html of new window
+    
+    pwrite("<tr>");
+    for(var i=0;i<headings.length;++i)
+        pwrite("<th>"+headings[i]+"</th>");
+    pwrite("</tr>");
+    
+    for(var i=0;i<rows.length;++i)
+    {
+        cur = rows[i];
+        pwrite("<tr>");
+        pwrite("<td>"+cur.Company+"</td>"); //company
+        pwrite("<td>"+cur.Services+"</td>"); //services
+        var hubs = cur.Hubs.Hub; //hubs
+        pwrite("<td>");
+        if(hubs.length != 0)
+        {
+            pwrite("<ul>");
+            for(var j=0; j<hubs.length; ++j)
+            {
+                //pwrite("<li>");
+                if(j == 0)
+                    pwrite("<b><li>"+hubs[j]+"</li></b>");
+                else
+                    pwrite("<li>"+hubs[j]+"</li>");
+                //pwrite("</li>");
+            }
+            pwrite("</ul>");
+        }
+        pwrite("</td>");    //hubs done
+        pwrite("<td>"+cur.Revenue+"</td>");
+        pwrite("<td><a href='"+cur.HomePage+"'>"+cur.HomePage+"</a></td>");
+        pwrite("<td><img src='"+cur.Logo+"' style='max-width:250px;'></td>");
+        
+    }
+    
+    pwrite("</table></body></html>"); //end the html of new window
+    
+}
+
+function callAjax(url,callback)
+{
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function(){
+        if(this.readyState == 4){
+            if(this.status == 200)
+                callback(xhttp);
+            else if(this.status==404){
+                console.debug("404 error");
+                alert("The file could not be found, please check the URL");
+            }
+            else {
+                console.debug("Error Status: "+this.status);    
+                alert("The file could not be opened, please check the URL");
+            }
+        }
+    }
+    console.debug("Sending AJAX request");
+    xhttp.open("GET",url,false);
+    xhttp.send();
+}
+</script>
+</head>
+<body>
+    <center>
+        <h2>Enter URL for Trucking List JSON File</h2>
+        <input type="text" id="fileLocation"><br><br>
+        <button onclick="retrieveJSON()">Submit Query</button>
+    </center>
+</body>
+</html>

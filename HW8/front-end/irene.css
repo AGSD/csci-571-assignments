@@ -1,0 +1,144 @@
+/*I am a CSS file*/
+#box {
+            background-color: #fafafa;
+            border: 2px solid #cccccc;
+            width:1000px;
+            margin:0 auto;
+            border-radius:10px;
+}
+#wrapper{
+    margin:10px;
+}
+.noRecords {
+    background-color: #FFF3CD;
+    color:#817044;
+    border-radius:5px;
+    padding:10px;
+}
+.default {
+    border-color: #e7e7e7;
+    border-width: 2px;
+    background-color:white;
+    color: black;
+}
+
+.default:hover {
+    background: #e7e7e7;
+}
+
+.default:disabled{
+    background-color:#e7e7e7;
+}
+
+th{
+    max-width: 120px;
+}
+
+#pageButtons{
+    text-align: center;
+}
+
+#favPageButtons{
+    text-align: center;
+}
+
+.photosClick>img{
+    width:100%;
+    padding:2px;
+    margin:3px;
+    border:1px solid #e7e7e7;
+}
+
+.nopadding {
+   padding: 3px !important;
+   margin: 0 !important;
+}
+
+#directionsButtonDiv{
+        text-align: right;
+}
+
+#mapDirections{
+    margin-top:38px;
+}
+
+#map{
+    width:100%;
+    height:400px;
+}
+
+#pano{
+    width:100%;
+    height:400px;
+}
+
+.fas.fa-star {
+    color:#fed530;
+}
+
+.animate-show-hide.ng-hide {
+  opacity: 0;
+}
+
+.animate-show-hide.ng-hide-remove {
+  transition: all linear 0.5s;
+}
+
+.animate-slider.ng-hide{
+    transform: translate(1000px);
+}
+
+.animate-slider.ng-hide-remove{
+    transition: all linear 0.5s;
+}
+
+.animate-sliderL.ng-hide{
+    transform: translate(-1000px);
+}
+
+.animate-sliderL.ng-hide-remove{
+    transition: all linear 0.5s;
+}
+
+/*.animate-show-hide.ng-hide-add*/
+
+@media screen and (max-width: 480px) {
+    #box{
+        width:100%;
+    }
+    #wrapper{
+        margin:10px;
+    }
+    a>img{
+        margin-top:3px;
+        margin-bottom:3px;
+        margin-left:0px;
+        margin-right:0px;
+    }
+    #directionsButtonDiv{
+        text-align: left;
+    }
+    #mapDirections{
+        margin-top:14px;
+    }
+    #map{
+        height: 280px;
+    }
+    #pano{
+    height:280px;
+    }
+}
+
+
+@media screen and (min-width: 800px) {
+    .reducedpadding-left{
+        padding-left:4px;
+    }
+    .reducedpadding-right{
+        padding-right:4px;
+    }
+    .reducedpadding-both{
+        padding-left:4px;
+        padding-right:4px;
+    }
+}

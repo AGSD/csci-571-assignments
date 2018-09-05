@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    
+    <!-- jQuery -->
+    <script src="jquery-3.3.1.min.js"></script>
+    
+    <!--Popper.js-->
+    <script src="https://unpkg.com/popper.js/dist/umd/popper.min.js"></script>
+    
+    <!-- Latest compiled and minified CSS Bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript Bootstrap-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+    <!--Font Awesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css" integrity="sha384-5SOiIsAziJl6AWe0HWRKTXlfcSHKmYV4RBF18PPJ173Kzn7jzMyFuTtk8JA7QQG1" crossorigin="anonymous">
+    
+    <!-- RateYo Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+    
+    <!-- RateYo Latest compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+    
+    <!--Moment js -->
+    <script rel="javascript" src="moment.js"></script>
+    
+    <!--Angular js -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.js"></script>
+    
+    <!-- local files -->
+    <link rel="stylesheet" href="irene.css">
+    <script rel="javascript" src="watson.js"></script>
+    <script rel="javascript" src="mycroft.js"></script>
+    
+</head>
+<body>
+<div id='wrapper'>
+    <div id='box' class="container">
+        <div class="row">
+        <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 col-xs-12">
+            <p class="text-center" style="font-size: 20px; font-weight:bold;">Travel and Entertainment Search</p>
+            </div>
+        </div>
+            <form name="searchForm">
+                <div class="form-group row">
+                    <div class="col-lg-2"></div>
+                    <label for="keyword" class="col-sm-12 col-xs-12 col-lg-2 col-form-label">Keyword<span style="color:red">*</span></label>
+                    <div class="col-sm-12 col-xs-12 col-lg-6">
+                        <input name='keyword' type='text' id="keyword" class="form-control">
+                        <div id="keywordError" style="color:red"></div>
+                    </div>
+                    <div class="col-lg-2"></div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-2"></div>
+                    <label for="category" class="col-sm-12 col-xs-12 col-lg-2 col-form-label">Category</label>
+                    <div class="col-sm-12 col-xs-12 col-lg-4">
+                        <select name='category' class="form-control" id='category'>
+                        <option value="default">Default</option>
+                        <option value="airport">Airport</option>
+                        <option value="amusement_park">Amusement Park</option>
+                        <option value="aquarium">Aquarium</option>
+                        <option value="art_gallery">Art Gallery</option>
+                        <option value="bakery">Bakery</option>
+                        <option value="bar">Bar</option>
+                        <option value="beauty_salon">Beauty Salon</option>
+                        <option value="bowling_alley">Bowling Alley</option>
+                        <option value="bus_station">Bus Station</option>
+                        <option value="cafe">Cafe</option>
+                        <option value="campground">Campground</option>
+                        <option value="casino">Casino</option>
+                        <option value="lodging">Lodging</option>
+                        <option value="movie_theater">Movie Theater</option>
+                        <option value="museum">Museum</option>
+                        <option value="night_club">Night Club</option>
+                        <option value="park">Park</option>
+                        <option value="parking">Parking</option>
+                        <option value="restaurant">Restaurant</option>
+                        <option value="shopping_mall">Shopping Mall</option>
+                        <option value="stadium">Stadium</option>
+                        <option value="subway_station">Subway Station</option>
+                        <option value="taxi_stand">Taxi Stand</option>
+                        <option value="train_station">Train Station</option>
+                        <option value="transit_station">Transit Station</option>
+                        <option value="travel_agency">Travel Agency</option>
+                        <option value="zoo">Zoo</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-4"></div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-2"></div>
+                    <label for="distance" class="col-sm-12 col-xs-12 col-lg-2 col-form-label">Distance (miles)</label>
+                    <div class="col-sm-12 col-xs-12 col-lg-4">
+                        <input name='distance' type='text' id="distance" class="form-control" placeholder="10">
+                    </div>
+                    <div class="col-lg-4"></div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-2"></div>
+                    <label for="from" class="col-sm-12 col-xs-12 col-lg-2 col-form-label">From<span style="color:red">*</span></label>
+                    <div class="col-sm-12 col-xs-12 col-lg-6">
+                        <input name='from' class="radio-inline" style="margin-top:0px" id='radioHere' type='radio' onclick="setClickedHere(this.form);" value='here' checked> Current location<br/>
+                        <input name='from' class="radio-inline" style="margin-top:0px" id='radioThere' type='radio' onclick="setClickedThere(this.form);" value=''> Other, Please specify: 
+                        <div id="pac-container">
+                            <input type='text' name='location' id="pac-input" class="form-control" placeholder='Enter a location' disabled/>
+                        </div>
+                        <div id="pac-inputError" style="color:red"></div>
+                    </div>
+                    <div class="col-lg-2"></div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-2"></div>
+                    <div class="col-sm-12 col-xs-12 col-lg-3">
+                        <button name='submitData' class="btn btn-primary" onclick="return sendData(this.form);" id='search' disabled>
+                        <span class="fas fa-search"></span> Search</button>
+                    <button name='clear' onclick="return clearEverything();" type='button' class="btn">Clear</button>
+                    </div>
+                    <div class="col-lg-7"></div>
+                </div>    
+            </form>
+    </div>
+    </div>
+    </div>
+    <br>
+    
+    <div id="SherlockSearch" ng-app="SherlockSearch" ng-controller="Lestrade">
+
+    <div class="row">
+        <div class="col-lg-12 col-sm-12 col-xs-12">
+        <ul class="nav nav-pills justify-content-center">
+          <li class="nav-item">
+            <a id="resultsButton" class="nav-link active" href="javascript:resultsNavbar('result');">Results</a>
+          </li>
+          <li class="nav-item">
+            <a id="favButton" class="nav-link" href="javascript:resultsNavbar('fav');">Favourites</a>
+          </li>
+        </ul>
+        </div>
+    </div>
+    <br>
+    
+    <div class="row">
+        <div class="col-lg-10 offset-lg-1">
+            <div id="progressBar" class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" style="width:50%;"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div ng-show="showResFav" id="tablePages" class="col-lg-12 col-sm-12 animate-sliderL">
+            <div class="row">
+                <div class="col-lg-1"></div>
+                <div id="detailsButton" class="col-lg-10 col-sm-12 col-xs-12">
+                    <button id="detailsButtonBtn" type="button" ng-click="showResFav=0" class="btn default" style="float:right;" disabled>Details <span class="fas fa-chevron-right"></span></button>
+                </div>
+                <div class="col-lg-1"></div>
+            </div>
+            <div class="row">
+                <div class="col-lg-1"></div>
+                <div id="placesTable" class="col-lg-10 col-sm-12 col-xs-12">
+                </div>
+                <div id="favTable" class="col-lg-10 col-sm-12 col-xs-12">
+                </div>
+                <div class="col-lg-1"></div>
+            </div>
+            <div class="row">
+                <div id="pageButtons" class="col-lg-10 offset-lg-1 col-sm-12 col-xs-12 justify-content-center">
+                </div>
+                <div id="favPageButtons" class="col-lg-10 offset-lg-1 col-sm-12 col-xs-12 justify-content-center">
+                </div>
+            </div>
+            <div id="tablePagesWarning" class="col-lg-10 offset-lg-1"></div>
+            <div id="favPagesWarning" class="col-lg-10 offset-lg-1"></div>
+        </div>
+        
+        
+        <div ng-hide="showResFav" id="detailsDiv" class="col-lg-12 col-sm-12 animate-slider">
+            <div class="row">
+                <div class="col-lg-10 offset-lg-1">
+                    <center>
+                        <div id="placeName" style="font-weight:600; font-size:22px">
+                        </div>
+                    </center>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-10 offset-lg-1" style="justify-content: space-between;">
+                    <button ng-click="showResFav=1" onclick="makeFavTable();handlePages();" class="btn default"><span class="fas fa-chevron-left"></span> List</button>
+                    <span style="float:right;">
+                    <button class="btn default"><span id="detailsFav" class="far fa-star"></span></button>
+                        <button id="tweetButton" class="btn" style="padding:0px"><img width=40px height=40px src="http://cs-server.usc.edu:45678/hw/hw8/images/Twitter.png"></button>
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-10 offset-lg-1">
+                <ul class="nav nav-tabs justify-content-end">
+                      <li class="nav-item">
+                        <a id="detailsNavInfo" class="nav-link active" href="javascript:detailsNavbar('Info');">Info</a>
+                      </li>
+                      <li class="nav-item">
+                        <a id="detailsNavPhotos" class="nav-link" href="javascript:detailsNavbar('Photos');">Photos</a>
+                      </li>
+                      <li class="nav-item">
+                        <a id="detailsNavMap" class="nav-link" href="javascript:detailsNavbar('Map');">Map</a>
+                      </li>
+                      <li class="nav-item">
+                        <a id="detailsNavReviews" class="nav-link" href="javascript:detailsNavbar('Reviews');">Reviews</a>
+                      </li>
+                    </ul>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div id="detailsInfo" class="col-lg-10 col-sm-12 col-xs-12 offset-lg-1">
+                    
+                </div>
+                <div id="detailsPhotos" class="col-lg-10 col-sm-12 col-xs-12 offset-lg-1">
+                    
+                    <div class="col-lg-12 col-sm-12 col-xs-12">
+                        <div class="row">
+                            <div id="photoCol0" class="col-lg-3 col-sm-12 col-xs-12 nopadding"></div>
+                            <div id="photoCol1" class="col-lg-3 col-sm-12 col-xs-12 nopadding"></div>
+                            <div id="photoCol2" class="col-lg-3 col-sm-12 col-xs-12 nopadding"></div>
+                            <div id="photoCol3" class="col-lg-3 col-sm-12 col-xs-12 nopadding"></div>
+                        </div>
+                    </div>
+
+                    <div id="photosWarning" class="col-lg-12"></div>
+                        
+                </div>
+                <div id="detailsMap" class="col-lg-12 col-sm-12 col-xs-12 ">
+                    <form name="mapForm">
+                        <div class="form-group row">
+                            <div class="col-lg-3 offset-lg-1 reducedpadding-right">
+                                <label for="mapFrom" class="col-form-label">From</label>
+                                <input name='mapFrom' type='text' id="mapFrom" class="form-control">
+                            </div>
+                            <div class="col-lg-3 reducedpadding-both">
+                                <label for="mapTo" class="col-form-label">To</label>
+                                <input name='mapTo' type='text' id="mapTo" class="form-control" disabled>
+                            </div>
+                            <div class="col-lg-2 reducedpadding-both">
+                                <label for="mapMode" class="col-form-label">Travel Mode</label>
+                                <select name='mapMode' id="mapMode" class="form-control">
+                                    <option value='DRIVING'>Driving</option>
+                                    <option value='BICYCLING'>Bicycling</option>
+                                    <option value='TRANSIT'>Transit</option>
+                                    <option value='WALKING'>Walking</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-2 reducedpadding-left" id="directionsButtonDiv">
+                                <button name='mapDirections' id="mapDirections" class="btn btn-primary" onclick="return calcRoute();">Get Directions</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="row">
+                        <div class="col-lg-10 offset-lg-1">
+                            <button id="toggleImage" class="btn default" style="padding:0px" onclick="toggleMapView()"><img width=40px src="http://cs-server.usc.edu:45678/hw/hw8/images/Pegman.png"></button>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-10 offset-lg-1">
+                            <div id='map'></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-10 offset-lg-1">
+                            <div id='pano'></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div id='panel' class="col-lg-10 offset-lg-1"></div>
+                    </div>
+                    
+                </div>
+                <div id="detailsReviews" class="col-lg-12 col-sm-12 col-xs-12">
+                    <div class="row">
+                        <div class="col-lg-10 offset-lg-1">
+                            <div class="dropdown btn-group">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="reviewTypeButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Google Reviews
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" ng-click="showGoogleRev = 1" href="javascript:reviewType('Google Reviews');">Google Reviews</a>
+                                    <a class="dropdown-item" ng-click="showGoogleRev = 0" href="javascript:reviewType('Yelp Reviews');">Yelp Reviews</a>
+                                </div>
+                            </div>
+                            <div class="dropdown btn-group">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="sortButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Default Order
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="javascript:orderReviews('do')">Default Order</a>
+                                    <a class="dropdown-item" href="javascript:orderReviews('hr')">Highest Rating</a>
+                                    <a class="dropdown-item" href="javascript:orderReviews('lr')">Lowest Rating</a>
+                                    <a class="dropdown-item" href="javascript:orderReviews('mre')">Most Recent</a>
+                                    <a class="dropdown-item" href="javascript:orderReviews('lre')">Least Recent</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div ng-show="showGoogleRev" id="googleReviews" class="col-lg-10 offset-lg-1 animate-show-hide"></div>
+                        <div ng-hide="showGoogleRev" id="yelpReviews" class="col-lg-10 offset-lg-1 animate-show-hide"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="placeData">
+    </div>
+</div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbp8DlTn-ps7H-YImJUnmtIkya7uUX6iI&libraries=places&callback=initAutocompletes"
+        async defer></script>
+<script src="moriarty.js"></script>
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Open hours</h5>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div id="modalData"></div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
